@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="ClaSearcherGUI.MissionBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClaSearcherGUI"
+             xmlns:image="clr-namespace:ClaSearcherGUI.Progress"
+             mc:Ignorable="d">
+    <Grid Height="205" Width="205" MouseEnter="onHover" MouseLeave="onExitHover"  MouseLeftButtonDown="ClickMission">
+        <Grid.Resources>
+            <Style x:Key="ScaleStyle" TargetType="TextBlock">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <Rectangle x:Name="BG" HorizontalAlignment="Left" Height="188" Stroke="Black" VerticalAlignment="Top" Width="188" Margin="7,8,0,0" Fill="#FF343434" RenderTransformOrigin="0.5,0.5" StrokeThickness="7" RadiusY="2.711" RadiusX="2.711"/>
+        <Image x:Name="MissionPreview" Margin="22,25,25,0" RenderTransformOrigin="0.5,0.5" Source="Progress\loader_0.png" Height="112" VerticalAlignment="Top"/>
+        <Label x:Name="MissionName" Content="MissionName" Margin="22,146,-41,0" Height="42" VerticalAlignment="Top" FontSize="11" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False"/>
+        <Label x:Name="AuthorName" Content="Author" Margin="22,163,-41,0" Height="42" VerticalAlignment="Top" FontSize="11" Foreground="White" RenderTransformOrigin="0.5,0.5"/>
+        <Border Name="DifficultyBorder"  BorderBrush="Black" BorderThickness="0.5" Height="{Binding RenderSize.Height, ElementName=label}" Margin="0,137,24,51" Width="{Binding RenderSize.Width, ElementName=label}" UseLayoutRounding="False" CornerRadius="5" Background="Red" HorizontalAlignment="Right">
+            <Grid>
+                <Label x:Name="DifficultyLevel" Content="Difficulty" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Foreground="Black" HorizontalAlignment="Left"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

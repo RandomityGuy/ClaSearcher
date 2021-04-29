@@ -35,7 +35,7 @@ namespace ClaSearcherGUI
         {
             InitializeComponent();
             var client = new WebClient();
-            var missionlistdata = client.DownloadString("https://cla.higuy.me/api/v1/missions");
+            var missionlistdata = client.DownloadString("https://marbleland.vani.ga/api/level/list");
             missionList = JsonConvert.DeserializeObject<List<Mission>>(missionlistdata);
             maxpages = (int)Math.Ceiling((double)missionList.Count / 15);
             shownMissionList = missionList;
@@ -156,11 +156,11 @@ namespace ClaSearcherGUI
                 case 0:
                     break;
                 case 1:
-                    outlist = missionList.Where(a => a.GameType == "Single Player");
+                    outlist = missionList.Where(a => a.GameType == "single");
                     break;
 
                 case 2:
-                    outlist = missionList.Where(a => a.GameType == "Multiplayer");
+                    outlist = missionList.Where(a => a.GameType == "multi");
                     break;
             }
 
@@ -178,7 +178,7 @@ namespace ClaSearcherGUI
                     break;
 
                 case 3:
-                    outlist = outlist.Where(a => a.Modification == "Ultra"); //goddamnit the capital letter
+                    outlist = outlist.Where(a => a.Modification == "ultra"); 
                     break;
 
                 case 4:

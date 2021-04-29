@@ -34,13 +34,15 @@ namespace ClaSearcher
         public string artist;
         public string modification;
         public string gameType;
+        public string gameMode;
         public string baseName;
         public int gems;
         public int? difficulty;
         public float? rating;
         public int? weight;
-        public bool egg;
+        public bool hasEasterEgg;
         public string bitmap;
+        public long addedAt;
         bool isDownloading = false;
         BitmapImage downloadedImage = null;
         public int Id
@@ -55,12 +57,14 @@ namespace ClaSearcher
         public string Artist { get => artist; } 
         public string Modification { get => modification;  }
         public string GameType { get => gameType;  }
+        public string GameMode { get => gameMode; }
         public string BaseName { get => baseName;  }
         public int Gems { get => gems;  }
-        public bool Egg { get => egg;  }
+        public bool Egg { get => hasEasterEgg;  }
         public float? Rating { get => rating; }
         public int? Difficulty { get => difficulty; }
         public int? RatingWeight { get => weight; }
+        public long AddedAt { get => addedAt; }
         public async Task<BitmapImage> getDownloadImageAsync(Image progress,Dispatcher dispatcher)
         {
             if (downloadedImage != null) return downloadedImage;
@@ -77,7 +81,7 @@ namespace ClaSearcher
                     downloadedImage = ToImage(bitmapdownloaded);
                     dispatcher.BeginInvoke(new Action(delegate () { progress.Source = downloadedImage; }));
                 };
-                var bitmapdata = await client.DownloadDataTaskAsync("https://cla.higuy.me/api/v1/missions/" + id.ToString() + "/bitmap");
+                var bitmapdata = await client.DownloadDataTaskAsync("https://marbleland.vani.ga/api/level/" + id.ToString() + "/image");
                 downloadedImage = ToImage(bitmapdata);
 
                 return downloadedImage;
@@ -100,7 +104,7 @@ namespace ClaSearcher
                     isDownloading = false;
                 };
                 isDownloading = true;
-                client.DownloadFileAsync(new Uri("https://cla.higuy.me/api/v1/missions/" + Id.ToString() + "/zip"), BaseName + ".zip");
+                client.DownloadFileAsync(new Uri("https://marbleland.vani.ga/api/level/" + Id.ToString() + "/zip"), BaseName + ".zip");
             }
         }
         private string ProgressToImageURI(int progress)
